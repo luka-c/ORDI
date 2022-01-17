@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Water
+  - Damage
   layers:
   - Default
   - TransparentFX
@@ -49,4 +51,7 @@ TagManager:
     locked: 0
   - name: BigBoy
     uniqueID: 4188897927
+    locked: 0
+  - name: UI
+    uniqueID: 634778577
     locked: 0
