@@ -19,7 +19,7 @@ public class PlayerMovement2D : MonoBehaviour
     bool isDashing;
     private PolygonCollider2D playerCollider;
 
- 
+    public GameObject player;
 
     private void Start()
     {
@@ -33,12 +33,12 @@ public class PlayerMovement2D : MonoBehaviour
 
     private void Update()
     {
-        if (IsGrounded())
-            //animator.SetBool("isJumping", false);
-            Debug.Log("Grounded");
-        else
-            //animator.SetBool("isJumping", true);
-            Debug.Log("Not Grounded");
+        //if (IsGrounded())
+        //    //animator.SetBool("isJumping", false);
+        //    Debug.Log("Grounded");
+        //else
+        //    //animator.SetBool("isJumping", true);
+        //    Debug.Log("Not Grounded");
 
 
         //Move
@@ -84,5 +84,21 @@ public class PlayerMovement2D : MonoBehaviour
         float extraHeight = .01f;
         RaycastHit2D raycastHit = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + extraHeight);
         return raycastHit.collider != null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            player.transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            player.transform.parent = null;
+        }
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Water
   - Damage
+  - Trnje
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - ForeGround
   - 
   - 
-  - 
+  - Post
   - 
   - 
   - 
@@ -54,4 +56,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 634778577
+    locked: 0
+  - name: MainBackground
+    uniqueID: 732059827
     locked: 0
