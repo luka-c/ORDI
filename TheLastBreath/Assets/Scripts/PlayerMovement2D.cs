@@ -19,6 +19,7 @@ public class PlayerMovement2D : MonoBehaviour
     private PolygonCollider2D playerCollider;
     private bool direction;
     private GameObject[] players;
+    public GameObject player;
 
     private void Start()
     {
@@ -100,5 +101,21 @@ public class PlayerMovement2D : MonoBehaviour
 
         if (players.Length > 1)
             Destroy(players[1]);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            player.transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            player.transform.parent = null;
+        }
     }
 }
