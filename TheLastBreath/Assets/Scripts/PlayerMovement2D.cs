@@ -7,6 +7,7 @@ public class PlayerMovement2D : MonoBehaviour
     [Header("Movement")]
     public float speed = 1.5f;
     public float force = 1f;
+    public float jumpForce;
     private Rigidbody2D rg;
     public float dashSpeed = 4;
     private float dashTime;
@@ -16,6 +17,7 @@ public class PlayerMovement2D : MonoBehaviour
     [SerializeField]
     private LayerMask platformMask;
     bool isDashing;
+    private bool wallJumping = false;
     private PolygonCollider2D playerCollider;
     private bool direction;
     private GameObject[] players;
@@ -32,6 +34,7 @@ public class PlayerMovement2D : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(wallJumping);
         if (IsGrounded()) {
             animator.SetBool("isJumping", false);
         }
@@ -45,17 +48,31 @@ public class PlayerMovement2D : MonoBehaviour
         //Move
         var movement = Input.GetAxis("Horizontal");
 
-        if (movement < 0 && direction)
+        if (movement < 0 && direction){
             flipPlayer();
-        else if (movement > 0 && !direction)
+        }
+        else if (movement > 0 && !direction){
             flipPlayer();
-        
+        }
         animator.SetFloat("speed", Mathf.Abs(movement * speed));
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * speed;
 
         //Jump
-        if (Input.GetButtonDown("Jump") && IsGrounded()){
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !wallJumping){
             rg.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
+        }
+
+        if (wallJumping) {
+            rg.gravityScale = 0.5f;
+        } else {
+            rg.gravityScale = 2;
+        }
+
+        if (Input.GetButtonDown("Jump") && wallJumping) {
+                float velocityX = rg.velocity.x + (2.5f * jumpForce) * (direction ? -1 : 1);
+                flipPlayer();
+                rg.AddForce (new Vector2(velocityX * 2, jumpForce / 5), ForceMode2D.Impulse);
+                wallJumping = false;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && movement != 0) {
@@ -108,7 +125,15 @@ public class PlayerMovement2D : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             player.transform.parent = collision.gameObject.transform;
+            wallJumping = false;
         }
+
+        if (collision.gameObject.CompareTag("Wall")) {
+            wallJumping = true;
+        }
+    }
+    void checkIfWallSliding(){ 
+    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -116,6 +141,9 @@ public class PlayerMovement2D : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             player.transform.parent = null;
+        }        
+        if (collision.gameObject.CompareTag("Wall")) {
+            wallJumping = false;
         }
     }
 }

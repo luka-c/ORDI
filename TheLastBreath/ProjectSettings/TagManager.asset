@@ -8,6 +8,7 @@ TagManager:
   - Damage
   - Trnje
   - Platform
+  - Wall
   layers:
   - Default
   - TransparentFX
