@@ -10,15 +10,19 @@ public class PlayerHealth : MonoBehaviour
     //public HealthBar healthBar;
     public Canvas healthBar;
     private Image childLast;
+    private Rigidbody2D rg;
+
 
     void Start()
     {
+        rg = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         //healthBar.SetMaxhealth(maxHealth);
     }
 
     void Update()
     {
+        Debug.Log(currentHealth);
         //if (Input.GetButtonDown("Jump")) {
         //    TakeDamage(20);
         //}
@@ -48,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Damage"))
         {
-            TakeDamage(25);
+            
             
             foreach (Transform child in healthBar.transform)
             {
@@ -65,6 +69,16 @@ public class PlayerHealth : MonoBehaviour
 
             Debug.Log(childLast.name);
             childLast.enabled = false;
+            StartCoroutine(ApplyDamage(collision));
         }
+    }
+
+    private IEnumerator ApplyDamage(Collider2D collision) {
+        TakeDamage(25);
+        Physics2D.IgnoreCollision(collision, GetComponent<PolygonCollider2D>());
+        rg.AddForce (new Vector2(0, 15), ForceMode2D.Impulse);
+        //rg.AddRelativeForce(-Vector2.left * 100);
+        yield return new WaitForSeconds(1);
+        Physics2D.IgnoreCollision(collision, GetComponent<PolygonCollider2D>(), false);
     }
 }

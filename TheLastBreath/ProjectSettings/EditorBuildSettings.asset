@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3700f7b3d78d87548ad3136cacb8441c
   - enabled: 1
+    path: Assets/Scenes/MainHub.unity
+    guid: ef8c87c6ad1b4794b9013ef7c8f4d975
+  - enabled: 1
+    path: Assets/Scenes/AirScene.unity
+    guid: 1e94dd9e79370594e997d425296f8743
+  - enabled: 1
+    path: Assets/Scenes/FireScene1.unity
+    guid: 97fdd8f8720b7844e948d90078dc5217
+  - enabled: 1
     path: Assets/Scenes/OverWorld.unity
     guid: fda27c4f19acd3c4e996881368037863
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
