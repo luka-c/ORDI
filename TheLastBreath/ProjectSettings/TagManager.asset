@@ -9,6 +9,8 @@ TagManager:
   - Trnje
   - Platform
   - Wall
+  - Checkpoint
+  - Pod
   layers:
   - Default
   - TransparentFX

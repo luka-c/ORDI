@@ -29,12 +29,12 @@ public class PlayerMovement2D : MonoBehaviour
         dashTime = startDashTime;
         playerCollider = this.GetComponent<PolygonCollider2D>();
         direction = true;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
-        Debug.Log(wallJumping);
+        //Debug.Log(wallJumping);
         if (IsGrounded()) {
             animator.SetBool("isJumping", false);
         }
@@ -132,6 +132,7 @@ public class PlayerMovement2D : MonoBehaviour
             wallJumping = true;
         }
     }
+
     void checkIfWallSliding(){ 
     
     }
