@@ -25,21 +25,25 @@ public class WaterSpiritText : MonoBehaviour
                 if (ScoreManager.instance.getScore() == 4)
                 {
                     floatingText.text = "Hi, little one! Please collect " + (5 - ScoreManager.instance.getScore()) + " more soul.";
-                } else
+                }
+                else
                 {
                     floatingText.text = "Hi, little one! Please collect " + (5 - ScoreManager.instance.getScore()) + " more souls.";
                 }
-            } else {
+            }
+            else
+            {
                 floatingText.text = "Farewell...";
                 SceneManager.LoadScene(1);
                 //trnje.SetActive(false);
             }
-             
+
             waterSpiritCanvas.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             waterSpiritCanvas.gameObject.SetActive(false);
         }
     }
-    
+
 }
