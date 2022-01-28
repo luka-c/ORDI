@@ -58,3 +58,19 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Temp/*
+TheLastBreath/builds/
+TheLastBreath/Library/*
+
+!TheLastBreath/Library/*.asset
+!TheLastBreath/Library/AssetImportState
+!TheLastBreath/Library/AssetVersioning.db
+!TheLastBreath/Library/BuildPlayer.prefs
+!TheLastBreath/Library/ScriptMapper
+!TheLastBreath/Library/assetservercachev3
+!TheLastBreath/Library/expandedItems
+!TheLastBreath/Library/guidmapper
+!TheLastBreath/Library/unity default resources
+!TheLastBreath/Library/unity editor resources
+!TheLastBreath/Library/metadata/
+
