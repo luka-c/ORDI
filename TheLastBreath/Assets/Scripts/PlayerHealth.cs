@@ -22,7 +22,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(currentHealth);
         //if (Input.GetButtonDown("Jump")) {
         //    TakeDamage(20);
         //}

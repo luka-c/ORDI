@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Checkpoint
   - Pod
+  - Abilities
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - 
   - Post
-  - 
+  - Glow
   - 
   - 
   - 

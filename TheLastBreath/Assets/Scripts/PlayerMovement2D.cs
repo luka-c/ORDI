@@ -23,8 +23,13 @@ public class PlayerMovement2D : MonoBehaviour
     private GameObject[] players;
     public GameObject player;
 
+    private float dashCooldown = 1f;
+    private float nextDash = 0f;
+    private UnlockedAbilities unlocked;
+
     private void Start()
     {
+        unlocked = GameObject.Find("Abilities").GetComponent<UnlockedAbilities>();
         rg = GetComponent<Rigidbody2D>();
         dashTime = startDashTime;
         playerCollider = this.GetComponent<PolygonCollider2D>();
@@ -75,7 +80,10 @@ public class PlayerMovement2D : MonoBehaviour
                 wallJumping = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && movement != 0) {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && movement != 0 && Time.time > nextDash && unlocked.canDash) {
+            
+            nextDash = Time.time + dashCooldown;
+
             if (movement < 0)
                 rg.AddRelativeForce(Vector2.left * dashSpeed * 100);
             else if (movement > 0)
@@ -122,14 +130,18 @@ public class PlayerMovement2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (unlocked.canWallJump)
         {
-            player.transform.parent = collision.gameObject.transform;
-            wallJumping = false;
-        }
+            if (collision.gameObject.CompareTag("Platform"))
+            {
+                player.transform.parent = collision.gameObject.transform;
+                wallJumping = false;
+            }
 
-        if (collision.gameObject.CompareTag("Wall")) {
-            wallJumping = true;
+            if (collision.gameObject.CompareTag("Wall"))
+            {
+                wallJumping = true;
+            }
         }
     }
 
